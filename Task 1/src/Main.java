@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+//Добавить в программу метод, который будет в информацию о книге добавлять: Название книги, кол-во страниц, цену книги в рублях.
+// Если у книги нет цены, то надо писать “не установлено”.
 public class Main {
     static String booksInfo = "";
 
@@ -8,8 +10,10 @@ public class Main {
         while (true) {
             String name = inputBookName();
             int pageCount = inputPageCount();
+            double valueBook = inputValueBook();
             addBook(name);
             addBook(name, pageCount);
+            addBook(name, pageCount, valueBook);
             //todo использовать новый метод тут
             printInfo();
         }
@@ -25,12 +29,23 @@ public class Main {
         return new Scanner(System.in).nextInt();
     }
 
+    public static double inputValueBook() {
+        System.out.println("Введите стоимость книги в рублях");
+        return new Scanner(System.in).nextDouble();
+    }
+
     public static void addBook(String bookName) {
         addBook(bookName, 0);
     }
 
     public static void addBook(String bookName, int pageCount) {
-        booksInfo = booksInfo + bookName + " - " + (pageCount > 0 ? pageCount : "N/A") + " стр.\n";
+       addBook(bookName, pageCount, 0);
+    }
+
+    public static void addBook(String bookName, int pageCount, double valueBoook) {
+
+        booksInfo = booksInfo + bookName + " - " + (pageCount > 0 ? pageCount : "N/A") + " стр. " +
+                (valueBoook > 0 ? valueBoook : "не определено") + " руб.\n";
     }
 
     public static void printInfo() {
